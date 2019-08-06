@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name" translatable="false">Tracker</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Tracker</string>
+    <string name="nav_header_subtitle" translatable="false">mdmehedi23@student.sust.edu</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
+
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="menu_gallery" translatable="false">Gallery</string>
+    <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="menu_tools" translatable="false">Tools</string>
+    <string name="menu_share" translatable="false">Share</string>
+    <string name="menu_send" translatable="false">Navigation</string>
+
+    <string name="access_token" translatable="false"> pk.eyJ1IjoibWVoZWRpcnVtaSIsImEiOiJjanl6ZmFsdGEwMTJpM21vNTJkbHdpMHhuIn0.SgHk-BCo27ElvGh5enUbxg </string>
+</resources>
