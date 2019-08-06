@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     public static LocationEngine locationEngine;
     public static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     public static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
+   public static Double latitude, longitude;
 
     private PermissionsManager permissionsManager;
 
@@ -279,7 +280,8 @@ public class MainActivity extends AppCompatActivity
 
             if (activity != null) {
                 Location location = result.getLastLocation();
-
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
                 if (location == null) {
                     return;
                 }
@@ -368,5 +370,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         initLocationEngine();
+
+
+        CameraPosition position = new CameraPosition.Builder()
+                .target(new LatLng(latitude, longitude)) // Sets the new camera position
+                .zoom(12) // Sets the zoom
+                .bearing(180) // Rotate the camera
+                .tilt(30) // Set the camera tilt
+                .build(); // Creates a CameraPosition from the builder
+
+        mapboxMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(position), 7000);
+        // Handle the camera action
     }
 }
