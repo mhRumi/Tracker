@@ -26,6 +26,9 @@ import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
@@ -47,11 +50,12 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,PermissionsListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,PermissionsListener, View.OnClickListener,
+        MapboxMap.OnMapClickListener {
 
     private MapView mapView;
     public  static Context context;
-    public MapboxMap mapboxMap;
+    public static MapboxMap mapboxMap;
     public static LocationEngine locationEngine;
     public static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     public static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
@@ -95,6 +99,8 @@ public class MainActivity extends AppCompatActivity
             public void onStyleLoaded(@NonNull Style style) {
 
                 enableLocationComponent(style);
+                mapboxMap.addOnMapClickListener(MainActivity.this::onMapClick);
+
             }
         });
     }
@@ -218,6 +224,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+
+            CameraPosition position = new CameraPosition.Builder()
+                    .target(new LatLng(24.9172, 91.8319)) // Sets the new camera position
+                    .zoom(17) // Sets the zoom
+                    .bearing(180) // Rotate the camera
+                    .tilt(30) // Set the camera tilt
+                    .build(); // Creates a CameraPosition from the builder
+
+            mapboxMap.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(position), 7000);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -236,6 +252,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public boolean onMapClick(@NonNull LatLng point) {
+
+        return false;
+    }
 
 
     private static class LocationChangeListeningActivityLocationCallback
@@ -346,8 +367,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        initLocationEngine();
     }
 }
