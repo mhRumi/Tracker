@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-    
+
 
 
     /**
@@ -106,28 +106,28 @@ public class MainActivity extends AppCompatActivity
      */
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
-// Check if permissions are enabled and if not request
+            // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-// Get an instance of the component
+            // Get an instance of the component
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
-// Set the LocationComponent activation options
+            // Set the LocationComponent activation options
             LocationComponentActivationOptions locationComponentActivationOptions =
                     LocationComponentActivationOptions.builder(this, loadedMapStyle)
                             .useDefaultLocationEngine(false)
                             .build();
 
-// Activate with the LocationComponentActivationOptions object
+            // Activate with the LocationComponentActivationOptions object
             locationComponent.activateLocationComponent(locationComponentActivationOptions);
 
-// Enable to make component visible
+            // Enable to make component visible
             locationComponent.setLocationComponentEnabled(true);
 
-// Set the component's camera mode
+            // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING);
 
-// Set the component's render mode
+            // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.COMPASS);
 
             initLocationEngine();
@@ -329,7 +329,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         super.onDestroy();
 // Prevent leaks
         if (locationEngine != null) {
