@@ -39,6 +39,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
+import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity
    public static Double latitude, longitude;
 
     private BuildingPlugin buildingPlugin;
+    private TrafficPlugin trafficPlugin;
 
     private PermissionsManager permissionsManager;
 
@@ -105,6 +107,10 @@ public class MainActivity extends AppCompatActivity
                 buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
                 buildingPlugin.setMinZoomLevel(15f);
                 buildingPlugin.setVisibility(true);
+
+                trafficPlugin = new TrafficPlugin(mapView, mapboxMap, style);
+                // Enable the traffic view by default
+                trafficPlugin.setVisibility(true);
 
                 enableLocationComponent(style);
                 mapboxMap.addOnMapClickListener(MainActivity.this::onMapClick);
@@ -374,6 +380,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         initLocationEngine();
+
+        if (mapboxMap != null) {
+            trafficPlugin.setVisibility(!trafficPlugin.isVisible());
+        }
 
 
         CameraPosition position = new CameraPosition.Builder()
