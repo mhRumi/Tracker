@@ -26,6 +26,7 @@ import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -37,6 +38,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity
     public static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     public static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
    public static Double latitude, longitude;
+
+    private BuildingPlugin buildingPlugin;
 
     private PermissionsManager permissionsManager;
 
@@ -95,9 +99,12 @@ public class MainActivity extends AppCompatActivity
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
 
-        mapboxMap.setStyle(Style.TRAFFIC_NIGHT, new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(Style.TRAFFIC_DAY, new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
+                buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
+                buildingPlugin.setMinZoomLevel(15f);
+                buildingPlugin.setVisibility(true);
 
                 enableLocationComponent(style);
                 mapboxMap.addOnMapClickListener(MainActivity.this::onMapClick);
@@ -105,8 +112,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
-
 
     /**
      * Initialize the Maps SDK's LocationComponent
@@ -143,8 +148,6 @@ public class MainActivity extends AppCompatActivity
             permissionsManager.requestLocationPermissions(this);
         }
     }
-
-
 
     /**
      * Set up the LocationEngine and the parameters for querying the device's location
@@ -235,7 +238,7 @@ public class MainActivity extends AppCompatActivity
 
             mapboxMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(position), 7000);
-            // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -255,6 +258,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
+
 
         return false;
     }
@@ -299,11 +303,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        /**
-         * The LocationEngineCallback interface's method which fires when the device's location can't be captured
-         *
-         * @param exception the exception message
-         */
+
         @Override
         public void onFailure(@NonNull Exception exception) {
             Log.d("LocationChangeActivity", exception.getLocalizedMessage());
@@ -341,6 +341,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onStop() {
         super.onStop();
+
+        if (locationEngine != null) {
+            locationEngine.removeLocationUpdates(callback);
+        }
         mapView.onStop();
     }
 
@@ -353,7 +357,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-// Prevent leaks
+        // Prevent leaks
         if (locationEngine != null) {
             locationEngine.removeLocationUpdates(callback);
         }
@@ -381,6 +385,5 @@ public class MainActivity extends AppCompatActivity
 
         mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(position), 7000);
-        // Handle the camera action
     }
 }

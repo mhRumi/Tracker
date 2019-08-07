@@ -17,4 +17,5 @@
     <string name="access_token" translatable="false"> pk.eyJ1IjoibWVoZWRpcnVtaSIsImEiOiJjanl6ZmFsdGEwMTJpM21vNTJkbHdpMHhuIn0.SgHk-BCo27ElvGh5enUbxg </string>
     <string name="user_location_permission_explanation">This application need access your gps</string>
     <string name="new_location" >new location</string>
+    <string name="Map_mode">TRAFFIC_NIGHT</string>
 </resources>

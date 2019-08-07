@@ -37,4 +37,5 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.41.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-building-v8:0.6.0'
 }
