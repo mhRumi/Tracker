@@ -296,6 +296,8 @@ public class MainActivity extends AppCompatActivity
                     return;
                 }
 
+                LocationStore.updateLocation(context,"rumi",latitude,longitude,"moucak");
+
 // Create a Toast which displays the new location's coordinates
 //                Toast.makeText(activity, String.format(activity.getString(R.string.new_location),
 //                        String.valueOf(result.getLastLocation().getLatitude()),
@@ -388,7 +390,7 @@ public class MainActivity extends AppCompatActivity
 
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)) // Sets the new camera position
-                .zoom(12) // Sets the zoom
+                .zoom(12)
                 .bearing(180) // Rotate the camera
                 .tilt(30) // Set the camera tilt
                 .build(); // Creates a CameraPosition from the builder
