@@ -18,15 +18,18 @@ import static com.android.volley.Request.Method.POST;
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class LocationStore {
-    public static final String url_LocationUpdate = "http://192.168.1.102/Tracker/DbConnect.php";
+    public static final String url_LocationUpdate = "http://10.100.161.152/Tracker/DbConnect.php";
+    //public static final String url_LocationUpdate = "http://192.168.31.68/Tracker/DbConnect.php";
+    public static String Gps_Id;
 
-    public static void updateLocation(Context context,String GpsId,Double Latitude, Double Longitude, String Road){
+
+    public static void updateLocation(Context context,Double Latitude, Double Longitude){
+
 
         StringRequest stringRequest = new StringRequest(POST, url_LocationUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_SHORT).show();
                     if(response.toString().equals("Updated successfully")){
 
 
@@ -52,10 +55,9 @@ public class LocationStore {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params= new HashMap<>();
-                params.put("GpsId",GpsId);
+                params.put("GpsId",MainActivity.androidId);
                 params.put("Latitude",Latitude.toString());
                 params.put("Longitude",Longitude.toString());
-                params.put("Road",Road);
 
                 return params;
             }

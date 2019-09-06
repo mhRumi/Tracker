@@ -1,17 +1,24 @@
 package com.example.tracker;
 
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -25,8 +32,9 @@ import com.mapbox.android.core.location.LocationEngineRequest;
 import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -40,6 +48,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -53,34 +64,50 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,PermissionsListener, View.OnClickListener,
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, PermissionsListener, View.OnClickListener,
         MapboxMap.OnMapClickListener {
 
-    private MapView mapView;
-    public  static Context context;
+    public static MapView mapView;
+    public static Context context;
     public static MapboxMap mapboxMap;
     public static LocationEngine locationEngine;
     public static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     public static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
-   public static Double latitude, longitude;
+    public static Double latitude, longitude;
 
     private BuildingPlugin buildingPlugin;
     private TrafficPlugin trafficPlugin;
 
     private PermissionsManager permissionsManager;
 
+    private Handler handler = new Handler();
+
+    private LatLng currentPosition = new LatLng(64.9009, -18.167040);
+    private GeoJsonSource geoJsonSource;
+    private ValueAnimator animator;
+
+    public static Location location;
+    public static LatLng destination;
+    LatLng point;
+    public  static String androidId;
+
+
     private LocationChangeListeningActivityLocationCallback callback =
             new LocationChangeListeningActivityLocationCallback(this);
 
+    @SuppressLint("MissingPermission")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this,getString(R.string.access_token));
+        Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
+
+        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -95,13 +122,19 @@ public class MainActivity extends AppCompatActivity
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
     }
 
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
+
         this.mapboxMap = mapboxMap;
 
-        mapboxMap.setStyle(Style.TRAFFIC_DAY, new Style.OnStyleLoaded() {
+        geoJsonSource = new GeoJsonSource("source-id",
+                Feature.fromGeometry(Point.fromLngLat(currentPosition.getLongitude(),
+                        currentPosition.getLatitude())));
+
+        mapboxMap.setStyle(Style.TRAFFIC_DAY , new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
@@ -112,18 +145,33 @@ public class MainActivity extends AppCompatActivity
                 // Enable the traffic view by default
                 trafficPlugin.setVisibility(true);
 
+                //******************************************
+                style.addImage(("marker_icon"), BitmapFactory.decodeResource(
+                        getResources(), R.drawable.location_marker1));
+
+                style.addSource(geoJsonSource);
+
+                style.addLayer(new SymbolLayer("layer-id", "source-id")
+                        .withProperties(
+                                PropertyFactory.iconImage("marker_icon"),
+                                PropertyFactory.iconIgnorePlacement(true),
+                                PropertyFactory.iconAllowOverlap(true)));
+
                 enableLocationComponent(style);
                 mapboxMap.addOnMapClickListener(MainActivity.this::onMapClick);
 
             }
         });
+
+
     }
+
 
     /**
      * Initialize the Maps SDK's LocationComponent
      */
     @SuppressWarnings( {"MissingPermission"})
-    private void enableLocationComponent(@NonNull Style loadedMapStyle) {
+    public void enableLocationComponent(@NonNull Style loadedMapStyle) {
             // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -223,6 +271,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id == R.id.id){
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -236,7 +286,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
             CameraPosition position = new CameraPosition.Builder()
-                    .target(new LatLng(24.9172, 91.8319)) // Sets the new camera position
+                    .target(new LatLng(24.919351, 91.831725)) // Sets the new camera position
                     .zoom(17) // Sets the zoom
                     .bearing(180) // Rotate the camera
                     .tilt(30) // Set the camera tilt
@@ -266,8 +316,33 @@ public class MainActivity extends AppCompatActivity
     public boolean onMapClick(@NonNull LatLng point) {
 
 
+        this.point = point;
+        repeat.run();
         return false;
     }
+
+    private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
+            new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
+                    geoJsonSource.setGeoJson(Point.fromLngLat(animatedPosition.getLongitude(), animatedPosition.getLatitude()));
+                }
+            };
+
+    private static final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
+
+        private final LatLng latLng = new LatLng();
+
+        @Override
+        public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
+            latLng.setLatitude(startValue.getLatitude()
+                    + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+            latLng.setLongitude(startValue.getLongitude()
+                    + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+            return latLng;
+        }
+    };
 
 
     private static class LocationChangeListeningActivityLocationCallback
@@ -289,20 +364,16 @@ public class MainActivity extends AppCompatActivity
             MainActivity activity = activityWeakReference.get();
 
             if (activity != null) {
-                Location location = result.getLastLocation();
+                 location = result.getLastLocation();
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
                 if (location == null) {
                     return;
                 }
 
-                LocationStore.updateLocation(context,"rumi",latitude,longitude,"moucak");
+                    LocationStore.updateLocation(context, latitude, longitude);
 
-// Create a Toast which displays the new location's coordinates
-//                Toast.makeText(activity, String.format(activity.getString(R.string.new_location),
-//                        String.valueOf(result.getLastLocation().getLatitude()),
-//                        String.valueOf(result.getLastLocation().getLongitude())),
-//                        Toast.LENGTH_SHORT).show();
+
 
               // Pass the new location to the Maps SDK's LocationComponent
                 if (activity.mapboxMap != null && result.getLastLocation() != null) {
@@ -390,7 +461,7 @@ public class MainActivity extends AppCompatActivity
 
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)) // Sets the new camera position
-                .zoom(12)
+                .zoom(15)
                 .bearing(180) // Rotate the camera
                 .tilt(30) // Set the camera tilt
                 .build(); // Creates a CameraPosition from the builder
@@ -398,4 +469,38 @@ public class MainActivity extends AppCompatActivity
         mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(position), 7000);
     }
+
+    private Runnable repeat = new Runnable() {
+        @SuppressLint("MissingPermission")
+        @Override
+        public void run() {
+
+            LocationStore.updateLocation(context, latitude, longitude);
+
+            GetLocation.getLocation(context,androidId,mapboxMap);
+
+            LatLng start = new LatLng(GetLocation.startLatitude,GetLocation.startLongitude);
+            if(destination == null){
+                destination = point;
+            }
+            if(start == null){
+                start = new LatLng(latitude,longitude);
+            }
+
+            if (animator != null && animator.isStarted()) {
+                currentPosition = (LatLng) animator.getAnimatedValue();
+                animator.cancel();
+            }
+
+            animator = ObjectAnimator
+                    .ofObject(latLngEvaluator, start, destination)
+                    .setDuration(500);
+            animator.addUpdateListener(animatorUpdateListener);
+            animator.start();
+
+
+            handler.postDelayed(this,200);
+        }
+    };
+
 }
