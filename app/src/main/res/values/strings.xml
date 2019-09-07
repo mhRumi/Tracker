@@ -9,7 +9,7 @@
 
     <string name="menu_home" translatable="false">Home</string>
     <string name="menu_gallery" translatable="false">Gallery</string>
-    <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="menu_bus_schedule" translatable="false">Bus Schedule</string>
     <string name="menu_tools" translatable="false">Tools</string>
     <string name="menu_share" translatable="false">Share</string>
     <string name="menu_send" translatable="false">Navigation</string>

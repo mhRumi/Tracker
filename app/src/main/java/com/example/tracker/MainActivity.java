@@ -80,15 +80,15 @@ public class MainActivity extends AppCompatActivity
 
     private PermissionsManager permissionsManager;
 
-    private Handler handler = new Handler();
+    public static Handler handler = new Handler();
 
-    private LatLng currentPosition = new LatLng(64.9009, -18.167040);
-    private GeoJsonSource geoJsonSource;
-    private ValueAnimator animator;
+    public static LatLng currentPosition = new LatLng(64.9009, -18.167040);
+    public static GeoJsonSource geoJsonSource;
+    public static ValueAnimator animator;
 
     public static Location location;
     public static LatLng destination;
-    LatLng point;
+    public static LatLng point;
     public  static String androidId;
 
 
@@ -271,8 +271,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-        else if(id == R.id.id){
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -317,33 +316,11 @@ public class MainActivity extends AppCompatActivity
 
 
         this.point = point;
-        repeat.run();
+        //repeat.run();
+        Repeater ob = new Repeater();
+        ob.run();
         return false;
     }
-
-    private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
-            new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
-                    geoJsonSource.setGeoJson(Point.fromLngLat(animatedPosition.getLongitude(), animatedPosition.getLatitude()));
-                }
-            };
-
-    private static final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
-
-        private final LatLng latLng = new LatLng();
-
-        @Override
-        public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-            latLng.setLatitude(startValue.getLatitude()
-                    + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-            latLng.setLongitude(startValue.getLongitude()
-                    + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
-            return latLng;
-        }
-    };
-
 
     private static class LocationChangeListeningActivityLocationCallback
             implements LocationEngineCallback<LocationEngineResult> {
@@ -373,8 +350,6 @@ public class MainActivity extends AppCompatActivity
 
                     LocationStore.updateLocation(context, latitude, longitude);
 
-
-
               // Pass the new location to the Maps SDK's LocationComponent
                 if (activity.mapboxMap != null && result.getLastLocation() != null) {
                     activity.mapboxMap.getLocationComponent().forceLocationUpdate(result.getLastLocation());
@@ -393,9 +368,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
-
-
 
 
     @Override
@@ -458,7 +430,6 @@ public class MainActivity extends AppCompatActivity
             trafficPlugin.setVisibility(!trafficPlugin.isVisible());
         }
 
-
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)) // Sets the new camera position
                 .zoom(15)
@@ -470,37 +441,5 @@ public class MainActivity extends AppCompatActivity
                 .newCameraPosition(position), 7000);
     }
 
-    private Runnable repeat = new Runnable() {
-        @SuppressLint("MissingPermission")
-        @Override
-        public void run() {
-
-            LocationStore.updateLocation(context, latitude, longitude);
-
-            GetLocation.getLocation(context,androidId,mapboxMap);
-
-            LatLng start = new LatLng(GetLocation.startLatitude,GetLocation.startLongitude);
-            if(destination == null){
-                destination = point;
-            }
-            if(start == null){
-                start = new LatLng(latitude,longitude);
-            }
-
-            if (animator != null && animator.isStarted()) {
-                currentPosition = (LatLng) animator.getAnimatedValue();
-                animator.cancel();
-            }
-
-            animator = ObjectAnimator
-                    .ofObject(latLngEvaluator, start, destination)
-                    .setDuration(500);
-            animator.addUpdateListener(animatorUpdateListener);
-            animator.start();
-
-
-            handler.postDelayed(this,200);
-        }
-    };
 
 }

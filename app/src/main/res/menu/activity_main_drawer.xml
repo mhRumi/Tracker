@@ -14,8 +14,8 @@
             android:title="@string/menu_gallery" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:icon="@drawable/bus_schedule"
+            android:title="@string/menu_bus_schedule" />
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"
