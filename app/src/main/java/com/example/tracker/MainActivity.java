@@ -162,10 +162,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-
     }
-
 
     /**
      * Initialize the Maps SDK's LocationComponent
@@ -174,10 +171,8 @@ public class MainActivity extends AppCompatActivity
     public void enableLocationComponent(@NonNull Style loadedMapStyle) {
             // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
-
             // Get an instance of the component
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
-
             // Set the LocationComponent activation options
             LocationComponentActivationOptions locationComponentActivationOptions =
                     LocationComponentActivationOptions.builder(this, loadedMapStyle)
@@ -186,16 +181,12 @@ public class MainActivity extends AppCompatActivity
 
             // Activate with the LocationComponentActivationOptions object
             locationComponent.activateLocationComponent(locationComponentActivationOptions);
-
             // Enable to make component visible
             locationComponent.setLocationComponentEnabled(true);
-
             // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING);
-
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.COMPASS);
-
             initLocationEngine();
         } else {
             permissionsManager = new PermissionsManager(this);
@@ -322,53 +313,6 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
-    private static class LocationChangeListeningActivityLocationCallback
-            implements LocationEngineCallback<LocationEngineResult> {
-
-        private final WeakReference< MainActivity> activityWeakReference;
-
-        LocationChangeListeningActivityLocationCallback(MainActivity activity) {
-            this.activityWeakReference = new WeakReference<>(activity);
-        }
-
-        /**
-         * The LocationEngineCallback interface's method which fires when the device's location has changed.
-         *
-         * @param result the LocationEngineResult object which has the last known location within it.
-         */
-        @Override
-        public void onSuccess(LocationEngineResult result) {
-            MainActivity activity = activityWeakReference.get();
-
-            if (activity != null) {
-                 location = result.getLastLocation();
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                if (location == null) {
-                    return;
-                }
-
-                    LocationStore.updateLocation(context, latitude, longitude);
-
-              // Pass the new location to the Maps SDK's LocationComponent
-                if (activity.mapboxMap != null && result.getLastLocation() != null) {
-                    activity.mapboxMap.getLocationComponent().forceLocationUpdate(result.getLastLocation());
-                }
-            }
-        }
-
-
-        @Override
-        public void onFailure(@NonNull Exception exception) {
-            Log.d("LocationChangeActivity", exception.getLocalizedMessage());
-            MainActivity activity = activityWeakReference.get();
-            if (activity != null) {
-                Toast.makeText(activity, exception.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
 
     @Override
     @SuppressWarnings( {"MissingPermission"})
@@ -440,6 +384,4 @@ public class MainActivity extends AppCompatActivity
         mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(position), 7000);
     }
-
-
 }
