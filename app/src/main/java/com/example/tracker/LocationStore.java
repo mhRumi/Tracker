@@ -18,8 +18,7 @@ import static com.android.volley.Request.Method.POST;
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 public class LocationStore {
-    public static final String url_LocationUpdate = "http://10.100.161.152/Tracker/DbConnect.php";
-    //public static final String url_LocationUpdate = "http://192.168.31.68/Tracker/DbConnect.php";
+    public static final String url_LocationUpdate = "http://10.100.171.186/Tracker/DbConnect.php";
     public static String Gps_Id;
 
 

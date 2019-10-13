@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:padding="2dp"
+    tools:context=".Bus_schedule">
+
+    <LinearLayout
+        android:padding="2dp"
+        android:background="#848484"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="University Area Transit Center"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            />
+
+        <LinearLayout
+            android:id="@+id/one"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Madina Market"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/two"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Madina Market"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        ****************
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/Three"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Eid Gah"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        **************************
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/four"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Mejor Tila"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+*********************************
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/Five"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Tilaghor"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        *************************
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/six"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Lakattura"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+*************************************
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/seven"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Upa-Sahar"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+**************************************
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/eight"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Madina Market"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        *************************************
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/last"
+            android:background="@drawable/border"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/bus_schedule" />
+
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:background="@drawable/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Madina Market"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Departure 8.10 a.m "
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_marginTop="2dp"
+
+                            android:background="@drawable/text_border"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:textAlignment="center"
+                            android:text="Back 9.10 am"
+                            android:textColor="#fff"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="15"
+                            android:textSize="40sp"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="min"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</ScrollView>

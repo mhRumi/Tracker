@@ -9,9 +9,13 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 
-public class Mode{
+public class Mode {
     private static BuildingPlugin buildingPlugin;
     private static TrafficPlugin trafficPlugin;
+
+    public Mode(){
+
+    }
 
     public static void night(MapboxMap mapboxMap){
         MainActivity.mapboxMap = mapboxMap;

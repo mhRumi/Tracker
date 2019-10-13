@@ -13,7 +13,7 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_buses"
             android:icon="@drawable/bus_schedule"
             android:title="@string/menu_bus_schedule" />
         <item

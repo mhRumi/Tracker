@@ -18,4 +18,31 @@
     <string name="user_location_permission_explanation">This application need access your gps</string>
     <string name="new_location">new location</string>
     <string name="Map_mode">TRAFFIC_NIGHT</string>
+
+
+    <string-array name="location">
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+        <item> location</item>
+    </string-array>
+
+    <string-array name="Departure">
+        <item> 12.10 pm </item>
+        <item> 1.10 pm </item>
+        <item> 4.10 pm </item>
+        <item> 8.30 pm </item>
+        <item> 7.30 pm </item>
+        <item> 9.10 pm </item>
+        <item> 10.10 pm </item>
+        <item> 11.10 pm </item>
+        <item> 8.10 pm </item>
+        <item> 8.10 pm </item>
+    </string-array>
 </resources>

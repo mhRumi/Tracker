@@ -5,6 +5,7 @@ import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Build;
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity
     public static LatLng destination;
     public static LatLng point;
     public  static String androidId;
+    public static String needed_location_Id;
 
 
     private LocationChangeListeningActivityLocationCallback callback =
@@ -220,8 +222,6 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
     }
 
-
-
     @Override
     public void onPermissionResult(boolean granted) {
         if (granted) {
@@ -253,9 +253,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -287,7 +284,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_buses) {
+            Intent intent = new Intent(getApplicationContext(),Bus_schedule.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_tools) {
 

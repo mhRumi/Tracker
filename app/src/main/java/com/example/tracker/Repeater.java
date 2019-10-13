@@ -5,8 +5,11 @@ import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 
 import com.mapbox.geojson.Point;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 
+import static com.example.tracker.MainActivity.locationEngine;
 import static com.example.tracker.MainActivity.longitude;
 import static com.example.tracker.MainActivity.point;
 
