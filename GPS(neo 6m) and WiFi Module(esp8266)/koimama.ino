@@ -48,3 +48,22 @@ void setup()
   Serial.println("");
   Serial.println("WiFi Connected");
 }
+
+void loop()
+{
+  {
+    while (ss.available()>0)
+    if(gps.encode(ss.read()))
+    {
+      if(gps.location.isValid())
+      {
+        latitude = gps.location.lat();
+        lat_str = String(latitude , 6);
+        longitude = gps.location.lng();
+        lng_str = String(longitude , 6);
+        Serial.println(lat_str + " " + lng_str);
+        String loc = "GpsId=" + gppps + "&Latitude=" + lat_str + "&Longitude=" + lng_str;
+      }
+    }
+  }
+}
