@@ -21,7 +21,7 @@ SoftwareSerial ss(4,5); // for connect GPS
 const char* ssid = "*******"; //Wifi SSID Name
 const char* password = "*******"; //Password of the Wifi
 
-const char* host = "**********"; //Servername
+const char* host = "**********"; //Servername or localhost address name
 String url = "**********"; //Server hit url
 
 float latitude , longitude;
@@ -77,11 +77,11 @@ void send(String loc)
       HTTPClient http;
       WiFiClient client;
       const int httpport = 80;
-      if(!client.connect(host, httpport))
-      {
-        Serial.println("Failed");
-        return ;
-      }
+      if(!client.connect(host, httpport)) //Comments below dotted line when using localhost as server
+      { // ...
+        Serial.println("Failed"); // ...
+        return ; // ...
+      } // ...
       Serial.println("Requesting");
       String address = host + url;
 
