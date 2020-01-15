@@ -18,11 +18,11 @@ TinyGPSPlus gps;
 
 SoftwareSerial ss(4,5); // for connect GPS
 
-const char* ssid = "DangerZone";
-const char* password = "nopassword";
+const char* ssid = "*******"; //Wifi SSID Name
+const char* password = "*******"; //Password of the Wifi
 
-const char* host = "**********";
-String url = "**********";
+const char* host = "**********"; //Servername
+String url = "**********"; //Server hit url
 
 float latitude , longitude;
 
@@ -86,11 +86,11 @@ void send(String loc)
       String address = host + url;
 
       http.begin(address);
-      http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+      http.addHeader("Content-Type", "application/x-www-form-urlencoded"); 
       http.POST(loc);
       http.end();
       
-      delay(100);
+      delay(3000);
     }
   }
 }
