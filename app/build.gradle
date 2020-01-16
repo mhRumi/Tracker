@@ -44,4 +44,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.4'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 }

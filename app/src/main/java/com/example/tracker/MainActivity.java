@@ -262,6 +262,11 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
 
+        if(id == R.id.action_aboutus) {
+            Intent intent = new Intent(getApplicationContext(), AboutUs.class);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
