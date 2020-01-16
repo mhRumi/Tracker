@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity
     public static Location location;
     public static LatLng destination;
     public static LatLng point;
-    public  static String androidId;
+    public static String androidId;
     public static String needed_location_Id;
+    public static Double firstLatitude, firstLongitude;
 
 
     private LocationChangeListeningActivityLocationCallback callback =
@@ -109,7 +110,8 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
-        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        //androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        androidId = "01";
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -200,7 +202,7 @@ public class MainActivity extends AppCompatActivity
      * Set up the LocationEngine and the parameters for querying the device's location
      */
     @SuppressLint("MissingPermission")
-    private void initLocationEngine() {
+    public void initLocationEngine() {
         locationEngine = LocationEngineProvider.getBestLocationEngine(this);
 
         LocationEngineRequest request = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
@@ -272,15 +274,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
 
-            CameraPosition position = new CameraPosition.Builder()
-                    .target(new LatLng(24.919351, 91.831725)) // Sets the new camera position
-                    .zoom(17) // Sets the zoom
-                    .bearing(180) // Rotate the camera
-                    .tilt(30) // Set the camera tilt
-                    .build(); // Creates a CameraPosition from the builder
-
-            mapboxMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(position), 7000);
+            setCameraPosition(24.919351, 91.831725);
 
         } else if (id == R.id.nav_gallery) {
 
@@ -289,11 +283,14 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_tools) {
+            Intent intent = new Intent(getApplicationContext(), SpeedMeter.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_nav) {
+            Intent intent = new Intent(getApplicationContext(), Navigation.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -303,10 +300,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
-
-
         this.point = point;
-        //repeat.run();
         Repeater ob = new Repeater();
         ob.run();
         return false;
@@ -372,15 +366,19 @@ public class MainActivity extends AppCompatActivity
         if (mapboxMap != null) {
             trafficPlugin.setVisibility(!trafficPlugin.isVisible());
         }
+        setCameraPosition(latitude, longitude);
+    }
 
+    public void setCameraPosition(Double latitude, Double longitude){
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)) // Sets the new camera position
-                .zoom(15)
+                .zoom(17)
                 .bearing(180) // Rotate the camera
                 .tilt(30) // Set the camera tilt
                 .build(); // Creates a CameraPosition from the builder
 
         mapboxMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(position), 7000);
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.tracker;
 
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +15,9 @@ public class LocationChangeListeningActivityLocationCallback implements Location
 
     private final WeakReference< MainActivity> activityWeakReference;
 
+    boolean chk = true;
+    public static Location locationForNavigation;
+
     LocationChangeListeningActivityLocationCallback(MainActivity activity) {
         this.activityWeakReference = new WeakReference<>(activity);
     }
@@ -24,6 +28,14 @@ public class LocationChangeListeningActivityLocationCallback implements Location
         MainActivity activity = activityWeakReference.get();
 
         if (activity != null) {
+
+            if(chk)
+            {
+                MainActivity.firstLatitude = result.getLastLocation().getLatitude();
+                MainActivity.firstLongitude = result.getLastLocation().getLongitude();
+                chk = false;
+            }
+
             MainActivity.location = result.getLastLocation();
             MainActivity.latitude = MainActivity.location.getLatitude();
             MainActivity.longitude = MainActivity.location.getLongitude();
@@ -31,7 +43,13 @@ public class LocationChangeListeningActivityLocationCallback implements Location
                 return;
             }
 
-            LocationStore.updateLocation(MainActivity.context, MainActivity.latitude, MainActivity.longitude);
+            /*
+                The line below is for sending latitude and longitude to the server
+                Now we are working with gps module
+                that's why this line is commented
+                If anyone wants to update location to the server than he should remove it from commenting out
+            */
+            //LocationStore.updateLocation(MainActivity.context, MainActivity.latitude, MainActivity.longitude);
 
             // Pass the new location to the Maps SDK's LocationComponent
             if (activity.mapboxMap != null && result.getLastLocation() != null) {
