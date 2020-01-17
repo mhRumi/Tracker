@@ -43,5 +43,10 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+<<<<<<< HEAD
 
+=======
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.4'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+>>>>>>> 92f23a442f7260eefee43198295cf46536d639ee
 }

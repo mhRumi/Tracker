@@ -1,11 +1,19 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0@aar">
     <ANNOTATIONS>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9d19b2a4d75077a4be97524f72dd68f/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9d19b2a4d75077a4be97524f72dd68f/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9d19b2a4d75077a4be97524f72dd68f/jars/classes.jar!/" />
+=======
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cabf5b914feec239518d1a067b4fd4a/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cabf5b914feec239518d1a067b4fd4a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cabf5b914feec239518d1a067b4fd4a/jars/classes.jar!/" />
+>>>>>>> 92f23a442f7260eefee43198295cf46536d639ee
     </CLASSES>
     <JAVADOC />
     <SOURCES>

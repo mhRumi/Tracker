@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle" translatable="false">mdmehedi23@student.sust.edu</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
+    <string name="action_aboutus" translatable="false">About Us</string>
 
     <string name="menu_home" translatable="false">University transit center</string>
     <string name="menu_gallery" translatable="false">Map Gallery</string>

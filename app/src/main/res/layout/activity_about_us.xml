@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AboutUs">
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Developed By : "
+            android:layout_marginTop="70dp"
+            android:typeface="sans"
+            android:textColor="#FBFBFD"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_marginTop="30dp"
+            android:id="@+id/rumi"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/rumi"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Mehedi Hasan Rumi"
+            android:textColor="#FBFBFD"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/email"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mdmehedi23@student.sust.edu"
+                android:layout_marginLeft="5dp"
+                android:textColor="#FBFBFD"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/github"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="https://github.com/mhRumi"
+                android:layout_marginLeft="5dp"
+                android:textColor="#FBFBFD"
+                />
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_marginTop="30dp"
+            android:id="@+id/emon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/emon"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Mahfuzur Rahman Emon"
+            android:textColor="#FBFBFD"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/email"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mahfuzur03@student.sust.edu"
+                android:layout_marginLeft="5dp"
+                android:textColor="#FBFBFD"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/github"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="https://github.com/emon-swe-sust"
+                android:layout_marginLeft="5dp"
+                android:textColor="#FBFBFD"
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Supervised By: "
+            android:layout_marginTop="70dp"
+            android:typeface="sans"
+            android:textColor="#FBFBFD"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Asif Mohammed Samir "
+            android:layout_marginTop="20dp"
+            android:typeface="sans"
+            android:textColor="#FBFBFD"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Assistant Professor, IICT "
+            android:layout_marginTop="10dp"
+            android:typeface="sans"
+            android:textColor="#FBFBFD"
+            />
+
+
+
+    </LinearLayout>
+</ScrollView>
