@@ -135,8 +135,6 @@ public class MainActivity extends AppCompatActivity
 
         //androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         androidId = "01";
-        nav = findViewById(R.id.nav);
-        nav.setOnClickListener(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -304,8 +302,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_nav) {
-
+        } else if (id == R.id.route_remove) {
+            navigationMapRoute.removeRoute();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -317,7 +315,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onMapClick(@NonNull LatLng point) {
         destinationPosition = Point.fromLngLat(point.getLongitude(),point.getLatitude());
         originPosition = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(), locationComponent.getLastKnownLocation().getLatitude());
-
         Route.getRoute(originPosition, destinationPosition);
         this.point = point;
         return false;
@@ -378,20 +375,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         initLocationEngine();
-        String id = Integer.toString(view.getId()) ;
-
-        if(view.getId() == R.id.nav){
-            Toast.makeText(this,"button is clicked",Toast.LENGTH_SHORT).show();
-            NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                    .directionsRoute(currentRoute)
-                    .shouldSimulateRoute(true)
-                    .build();
-            NavigationLauncher.startNavigation(this,options);
-        }
 
         if(navigationMapRoute != null)
         {
-            navigationMapRoute.removeRoute();
+
         }
 
         if (mapboxMap != null) {

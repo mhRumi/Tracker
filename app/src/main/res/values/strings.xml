@@ -13,7 +13,7 @@
     <string name="menu_bus_schedule" translatable="false">Bus Schedule</string>
     <string name="menu_tools" translatable="false">Track</string>
     <string name="menu_share" translatable="false">Share location</string>
-    <string name="menu_send" translatable="false">Navigation</string>
+    <string name="menu_remove" translatable="false">Clear route</string>
 
     <string name="access_token" translatable="false"> sk.eyJ1IjoibWVoZWRpcnVtaSIsImEiOiJjazVoZHM1ZXkwMmo0M2xudmIzZjNxNG85In0.Z4M4-gPDTIIxr9MB7BPHoQ</string>
     <string name="user_location_permission_explanation">This application need access your gps</string>

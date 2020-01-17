@@ -29,9 +29,9 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/menu_share" />
             <item
-                android:id="@+id/nav_nav"
-                android:icon="@drawable/ic_navigation_black_24dp"
-                android:title="@string/menu_send" />
+                android:id="@+id/route_remove"
+                android:icon="@drawable/ic_remove_circle_outline_black_24dp"
+                android:title="@string/menu_remove" />
         </menu>
     </item>
 
