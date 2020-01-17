@@ -26,6 +26,7 @@ public class Bus_schedule extends AppCompatActivity implements View.OnClickListe
         if(view.getId() == R.id.one){
             Toast.makeText(getApplicationContext(),"Tracker is connecting with this bus",Toast.LENGTH_SHORT).show();
             MainActivity.needed_location_Id = "1a68e8adc0113507";
+            MainActivity.androidId = "01";
         }
     }
 }
