@@ -71,6 +71,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -112,8 +113,9 @@ public class MainActivity extends AppCompatActivity
     private Point destinationPosition;
     private Point originPosition;
     DirectionsRoute currentRoute;
-    LocationComponent locationComponent;
+    public static LocationComponent locationComponent;
     public static NavigationMapRoute navigationMapRoute;
+    Button nav;
 
     private LocationChangeListeningActivityLocationCallback callback = new LocationChangeListeningActivityLocationCallback(this);
 
@@ -131,6 +133,8 @@ public class MainActivity extends AppCompatActivity
 
         //androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         androidId = "01";
+        nav = findViewById(R.id.nav);
+        nav.setOnClickListener(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -279,7 +283,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
 
-            setCameraPosition(24.919351, 91.831725);
+            CameraChange.setCameraPosition(24.919351, 91.831725);
 
         } else if (id == R.id.nav_gallery) {
 
@@ -288,8 +292,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_tools) {
-            Intent intent = new Intent(getApplicationContext(), SpeedMeter.class);
-            startActivity(intent);
+            Repeater ob = new Repeater();
+            ob.run();
 
         } else if (id == R.id.nav_share) {
 
@@ -309,8 +313,6 @@ public class MainActivity extends AppCompatActivity
 
         Route.getRoute(originPosition, destinationPosition);
         this.point = point;
-        Repeater ob = new Repeater();
-        ob.run();
         return false;
     }
 
@@ -369,23 +371,26 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         initLocationEngine();
+        String id = Integer.toString(view.getId()) ;
+        Toast.makeText(this,"button is clicked",Toast.LENGTH_SHORT).show();
+        if(view.getId() == R.id.nav){
+
+            NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+                    .directionsRoute(currentRoute)
+                    .shouldSimulateRoute(true)
+                    .build();
+            NavigationLauncher.startNavigation(this,options);
+        }
+
+        if(navigationMapRoute != null)
+        {
+            navigationMapRoute.removeRoute();
+        }
 
         if (mapboxMap != null) {
             trafficPlugin.setVisibility(!trafficPlugin.isVisible());
         }
-        setCameraPosition(latitude, longitude);
+        CameraChange.setCameraPosition(latitude, longitude);
     }
 
-    public void setCameraPosition(Double latitude, Double longitude){
-        CameraPosition position = new CameraPosition.Builder()
-                .target(new LatLng(latitude, longitude)) // Sets the new camera position
-                .zoom(17)
-                .bearing(180) // Rotate the camera
-                .tilt(30) // Set the camera tilt
-                .build(); // Creates a CameraPosition from the builder
-
-        mapboxMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(position), 7000);
-
-    }
 }

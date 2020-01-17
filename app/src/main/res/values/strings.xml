@@ -7,11 +7,11 @@
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
 
-    <string name="menu_home" translatable="false">Home</string>
-    <string name="menu_gallery" translatable="false">Gallery</string>
+    <string name="menu_home" translatable="false">University transit center</string>
+    <string name="menu_gallery" translatable="false">Map Gallery</string>
     <string name="menu_bus_schedule" translatable="false">Bus Schedule</string>
-    <string name="menu_tools" translatable="false">Tools</string>
-    <string name="menu_share" translatable="false">Share</string>
+    <string name="menu_tools" translatable="false">Track</string>
+    <string name="menu_share" translatable="false">Share location</string>
     <string name="menu_send" translatable="false">Navigation</string>
 
     <string name="access_token" translatable="false"> sk.eyJ1IjoibWVoZWRpcnVtaSIsImEiOiJjazVoZHM1ZXkwMmo0M2xudmIzZjNxNG85In0.Z4M4-gPDTIIxr9MB7BPHoQ</string>
