@@ -15,12 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
-=======
         <activity android:name=".AboutUs"></activity>
-        <activity android:name=".Navigation" />
->>>>>>> 92f23a442f7260eefee43198295cf46536d639ee
-        <activity android:name=".WaypointNavigationActivity" />
+
         <activity android:name=".SpeedMeter" />
         <activity android:name=".Bus_schedule" />
         <activity

@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity
     public static NavigationMapRoute navigationMapRoute;
     Button nav;
 
+    StyleCycle styleCycle = new StyleCycle();
+
     private LocationChangeListeningActivityLocationCallback callback = new LocationChangeListeningActivityLocationCallback(this);
 
     @SuppressLint("MissingPermission")
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity
                 Feature.fromGeometry(Point.fromLngLat(currentPosition.getLongitude(),
                         currentPosition.getLatitude())));
 
-        mapboxMap.setStyle(Style.TRAFFIC_DAY , new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(styleCycle.getStyle(), new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
@@ -291,7 +293,7 @@ public class MainActivity extends AppCompatActivity
             CameraChange.setCameraPosition(24.919351, 91.831725);
 
         } else if (id == R.id.nav_gallery) {
-
+            mapboxMap.setStyle(styleCycle.getNextStyle());
         } else if (id == R.id.nav_buses) {
             Intent intent = new Intent(getApplicationContext(),Bus_schedule.class);
             startActivity(intent);
@@ -377,9 +379,9 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         initLocationEngine();
         String id = Integer.toString(view.getId()) ;
-        Toast.makeText(this,"button is clicked",Toast.LENGTH_SHORT).show();
-        if(view.getId() == R.id.nav){
 
+        if(view.getId() == R.id.nav){
+            Toast.makeText(this,"button is clicked",Toast.LENGTH_SHORT).show();
             NavigationLauncherOptions options = NavigationLauncherOptions.builder()
                     .directionsRoute(currentRoute)
                     .shouldSimulateRoute(true)
