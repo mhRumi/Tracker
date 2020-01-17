@@ -33,9 +33,13 @@ import com.mapbox.android.core.location.LocationEngineRequest;
 import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.api.directions.v5.models.DirectionsResponse;
+import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -52,6 +56,14 @@ import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
+import com.mapbox.services.android.navigation.ui.v5.NavigationViewOptions;
+import com.mapbox.services.android.navigation.ui.v5.listeners.NavigationListener;
+import com.mapbox.services.android.navigation.ui.v5.listeners.RouteListener;
+import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
+import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
+import com.mapbox.services.android.navigation.v5.routeprogress.ProgressChangeListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -63,6 +75,10 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, PermissionsListener, View.OnClickListener,
@@ -93,10 +109,13 @@ public class MainActivity extends AppCompatActivity
     public static String androidId;
     public static String needed_location_Id;
     public static Double firstLatitude, firstLongitude;
+    private Point destinationPosition;
+    private Point originPosition;
+    DirectionsRoute currentRoute;
+    LocationComponent locationComponent;
+    public static NavigationMapRoute navigationMapRoute;
 
-
-    private LocationChangeListeningActivityLocationCallback callback =
-            new LocationChangeListeningActivityLocationCallback(this);
+    private LocationChangeListeningActivityLocationCallback callback = new LocationChangeListeningActivityLocationCallback(this);
 
     @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -146,10 +165,8 @@ public class MainActivity extends AppCompatActivity
                 buildingPlugin.setVisibility(true);
 
                 trafficPlugin = new TrafficPlugin(mapView, mapboxMap, style);
-                // Enable the traffic view by default
                 trafficPlugin.setVisibility(true);
 
-                //******************************************
                 style.addImage(("marker_icon"), BitmapFactory.decodeResource(
                         getResources(), R.drawable.location_marker1));
 
@@ -168,28 +185,19 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    /**
-     * Initialize the Maps SDK's LocationComponent
-     */
+
     @SuppressWarnings( {"MissingPermission"})
     public void enableLocationComponent(@NonNull Style loadedMapStyle) {
-            // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
-            // Get an instance of the component
-            LocationComponent locationComponent = mapboxMap.getLocationComponent();
-            // Set the LocationComponent activation options
+            locationComponent = mapboxMap.getLocationComponent();
             LocationComponentActivationOptions locationComponentActivationOptions =
                     LocationComponentActivationOptions.builder(this, loadedMapStyle)
                             .useDefaultLocationEngine(false)
                             .build();
 
-            // Activate with the LocationComponentActivationOptions object
             locationComponent.activateLocationComponent(locationComponentActivationOptions);
-            // Enable to make component visible
             locationComponent.setLocationComponentEnabled(true);
-            // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING);
-            // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.COMPASS);
             initLocationEngine();
         } else {
@@ -198,9 +206,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * Set up the LocationEngine and the parameters for querying the device's location
-     */
     @SuppressLint("MissingPermission")
     public void initLocationEngine() {
         locationEngine = LocationEngineProvider.getBestLocationEngine(this);
@@ -289,8 +294,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_nav) {
-            Intent intent = new Intent(getApplicationContext(), Navigation.class);
-            startActivity(intent);
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -300,6 +304,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
+        destinationPosition = Point.fromLngLat(point.getLongitude(),point.getLatitude());
+        originPosition = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(), locationComponent.getLastKnownLocation().getLatitude());
+
+        Route.getRoute(originPosition, destinationPosition);
         this.point = point;
         Repeater ob = new Repeater();
         ob.run();
@@ -345,7 +353,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Prevent leaks
         if (locationEngine != null) {
             locationEngine.removeLocationUpdates(callback);
         }
