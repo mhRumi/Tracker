@@ -20,6 +20,7 @@ public class Repeater implements Runnable {
     TextView Meter;
     @Override
     public void run() {
+
         //SpeedMeter.distance(MainActivity.firstLatitude, MainActivity.firstLongitude,MainActivity.latitude, longitude);
 
         // this line commenting out because don't using android phone's gps
@@ -35,19 +36,26 @@ public class Repeater implements Runnable {
             start = new LatLng( MainActivity.latitude, MainActivity.longitude);
         }
 
-        if (MainActivity.animator != null && MainActivity.animator.isStarted()) {
-            MainActivity.currentPosition = (LatLng) MainActivity.animator.getAnimatedValue();
-            MainActivity.animator.cancel();
+
+
+        if(MainActivity.startTrack) {
+
+
+            if (MainActivity.animator != null && MainActivity.animator.isStarted()) {
+                MainActivity.currentPosition = (LatLng) MainActivity.animator.getAnimatedValue();
+                MainActivity.animator.cancel();
+            }
+
+            MainActivity.animator = ObjectAnimator
+                    .ofObject(latLngEvaluator, start, MainActivity.destination)
+                    .setDuration(1000);
+            MainActivity.animator.addUpdateListener(animatorUpdateListener);
+            MainActivity.animator.start();
+
+
+
         }
-
-        MainActivity.animator = ObjectAnimator
-                .ofObject(latLngEvaluator, start, MainActivity.destination)
-                .setDuration(2000);
-        MainActivity.animator.addUpdateListener(animatorUpdateListener);
-        MainActivity.animator.start();
-
-
-        MainActivity.handler.postDelayed(this,200);
+        MainActivity.handler.postDelayed(this, 500);
     }
 
     private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =

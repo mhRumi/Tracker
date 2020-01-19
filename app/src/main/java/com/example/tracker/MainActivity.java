@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
     DirectionsRoute currentRoute;
     public static LocationComponent locationComponent;
     public static NavigationMapRoute navigationMapRoute;
-    Button nav;
+    public static boolean startTrack = false;
 
     StyleCycle styleCycle = new StyleCycle();
 
@@ -297,8 +297,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_tools) {
-            Repeater ob = new Repeater();
-            ob.run();
+
+            MainActivity.startTrack = true;
 
         } else if (id == R.id.nav_share) {
 
@@ -326,6 +326,7 @@ public class MainActivity extends AppCompatActivity
     public void onStart() {
         super.onStart();
         mapView.onStart();
+
     }
 
     @Override
@@ -375,11 +376,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         initLocationEngine();
-
-        if(navigationMapRoute != null)
-        {
-
-        }
 
         if (mapboxMap != null) {
             trafficPlugin.setVisibility(!trafficPlugin.isVisible());
